@@ -36,8 +36,12 @@ public class SecurityConfig extends VaadinWebSecurity {
     protected void configure(HttpSecurity http) throws Exception {
         http.oauth2Login(c -> c.defaultSuccessUrl("/client/user"))
                 .logout(c -> c.addLogoutHandler(keycloakLogoutHandler).logoutSuccessUrl("/"));
-        http.authorizeHttpRequests(registry -> registry.requestMatchers(new AntPathRequestMatcher("/"))
-                        .permitAll());
+        http.authorizeHttpRequests(registry -> registry
+                .requestMatchers(new AntPathRequestMatcher("/"))
+                .permitAll()
+//                .requestMatchers(new AntPathRequestMatcher("/client/helloWorld"))
+//                .permitAll()
+        );
         super.configure(http);
     }
 //    @Bean

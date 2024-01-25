@@ -2,13 +2,15 @@ import { AppLayout } from '@hilla/react-components/AppLayout.js';
 import { DrawerToggle } from '@hilla/react-components/DrawerToggle.js';
 import Placeholder from 'Frontend/components/placeholder/Placeholder.js';
 import { useRouteMetadata } from 'Frontend/util/routing.js';
-import React, {Suspense, useEffect, useState} from 'react';
+import React, {Suspense, useEffect, useRef, useState} from 'react';
 import {NavLink, Outlet} from 'react-router-dom';
 import {useAuth} from "Frontend/auth";
 import {Button} from "@hilla/react-components/Button.js";
 import axios from 'axios';
 import { Icon } from '@hilla/react-components/Icon.js';
 import '@vaadin/icons';
+import {SideNavItem} from "@hilla/react-components/SideNavItem";
+import {SideNav, type SideNavElement} from "@hilla/react-components/SideNav";
 
 
 const navLinkClasses = ({ isActive }: any) => {
@@ -47,6 +49,7 @@ export default function MainLayout() {
         setThemeNight(!isthemeNight);
     }
 
+
     useEffect(() => {
         document.title = currentTitle;
         // UserInfoService.getUserInfo().then(userInfo => { setRoles(userInfo.authorities)
@@ -67,7 +70,7 @@ export default function MainLayout() {
   return (
     <AppLayout primarySection="drawer">
       <div slot="drawer" className="flex flex-col justify-between h-full p-m">
-          <header className="flex flex-col gap-m">
+          <header className="flex flex-col gap-m" >
               <h1 className="text-l m-0">Demo App</h1>
               <nav>
                   <NavLink className={navLinkClasses} to="/client/helloWorld">
@@ -84,33 +87,38 @@ export default function MainLayout() {
                       </NavLink>
                   }
                   <hr/>
-                  <NavLink className={navLinkClasses} to="/client/grid-column-filter">
-                      <Icon icon="vaadin:grid-v" style={iconStyleNormal} /> Grid Column Filter
+                  <NavLink className={navLinkClasses} to="/client/proveedores">
+                      <Icon icon="vaadin:grid-v" style={iconStyleNormal} /> Proveedores
                   </NavLink>
-                  <NavLink className={navLinkClasses} to="/client/grid-external-filter">
-                      <Icon icon="vaadin:grid-v" style={iconStyleNormal} /> Grid External Filter
-                  </NavLink>
-                  <NavLink className={navLinkClasses} to="/client/form">
-                      <Icon icon="vaadin:clipboard-text" style={iconStyleNormal} />Form
-                  </NavLink>
-                  <NavLink className={navLinkClasses} to="/client/autogrid">
-                      <Icon icon="vaadin:grid-v" style={iconStyleBlack} />AutoGrid
-                  </NavLink>
-                  <NavLink className={navLinkClasses} to="/client/autoform">
-                      <Icon icon="vaadin:clipboard-text" style={iconStyleBlack} />AutoForm
-                  </NavLink>
-                  <NavLink className={navLinkClasses} to="/client/autocrud">
-                      <Icon icon="vaadin:modal-list" style={iconStyleBlack} />AutoCrud
-                  </NavLink>
-                  <br/>
-                  <Button onClick={() => logout()} className={'primary'}>
-                      Logout
-                  </Button>
+                  <SideNav collapsible>
+                      <span style={{color:"lightgray", margin:"1rem"}} slot="label">Example</span>
+                      <NavLink className={navLinkClasses} to="/client/grid-column-filter">
+                          <Icon icon="vaadin:grid-v" style={iconStyleNormal} /> Grid Column Filter
+                      </NavLink>
+                      <NavLink className={navLinkClasses} to="/client/grid-external-filter">
+                          <Icon icon="vaadin:grid-v" style={iconStyleNormal} /> Grid External Filter
+                      </NavLink>
+                      <NavLink className={navLinkClasses} to="/client/form">
+                          <Icon icon="vaadin:clipboard-text" style={iconStyleNormal} />Form
+                      </NavLink>
+                      <NavLink className={navLinkClasses} to="/client/autogrid">
+                          <Icon icon="vaadin:grid-v" style={iconStyleBlack} />AutoGrid
+                      </NavLink>
+                      <NavLink className={navLinkClasses} to="/client/autoform">
+                          <Icon icon="vaadin:clipboard-text" style={iconStyleBlack} />AutoForm
+                      </NavLink>
+                      <NavLink className={navLinkClasses} to="/client/autocrud">
+                          <Icon icon="vaadin:modal-list" style={iconStyleBlack} />AutoCrud
+                      </NavLink>
+                  </SideNav>
               </nav>
           </header>
           <footer>
-              <Button onClick={() => changeTheme()}>
+              <Button onClick={() => changeTheme()} style={{margin:"1rem"}}>
                   <Icon icon="vaadin:adjust" style={{padding: '0rem'}}/>
+              </Button>
+              <Button onClick={() => logout()} className={'primary'} style={{margin:"1rem"}}>
+                  Logout
               </Button>
           </footer>
       </div>

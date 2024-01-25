@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import {ProveedorService} from "Frontend/generated/endpoints";
-import Proveedor from "Frontend/generated/com/example/application/entity/Proveedor";
+import {ProveedorSimpleService} from "Frontend/generated/endpoints";
+import ProveedorSimple from "Frontend/generated/com/example/application/entity/ProveedorSimple";
 import {
     Grid,
     type GridDataProviderCallback,
@@ -10,12 +10,10 @@ import {
 import Sort from "Frontend/generated/dev/hilla/mappedtypes/Sort";
 import Direction from "Frontend/generated/org/springframework/data/domain/Sort/Direction";
 import {GridSortColumn} from "@hilla/react-components/GridSortColumn";
-import {GridFilterColumn} from "@hilla/react-components/GridFilterColumn";
 import Matcher from "Frontend/generated/dev/hilla/crud/filter/PropertyStringFilter/Matcher";
 import {TextField} from "@hilla/react-components/TextField.js";
 import {Button} from "@hilla/react-components/Button.js";
 import {Icon} from "@hilla/react-components/Icon";
-import {useFormPart} from "@hilla/react-form";
 
 
 
@@ -40,8 +38,8 @@ export default function GridExternalFilterView() {
     }
 
     async function proveedorProvider(
-        params: GridDataProviderParams<Proveedor>,
-        callback: GridDataProviderCallback<Proveedor>
+        params: GridDataProviderParams<ProveedorSimple>,
+        callback: GridDataProviderCallback<ProveedorSimple>
 
     ){
         const sort: Sort = {
@@ -52,7 +50,7 @@ export default function GridExternalFilterView() {
             })),
         };
 
-        const res = await ProveedorService.listByName({
+        const res = await ProveedorSimpleService.listByName({
                 pageNumber:params.page,
                 pageSize:params.pageSize,
                 sort

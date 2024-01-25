@@ -9,6 +9,12 @@ export default function App() {
     useEffect(() => {
         const htmlElement= document.getElementsByTagName("html")[0];
         htmlElement.setAttribute("theme", "dark");
+       //  htmlElement.children[0].innerHTML += "<link rel=\"import\" href=\"bower_components/vaadin-material-theme/color.html\"><custom-style>"+
+       //      "<style include='material-light-color'>.primary {\n" +
+       //      "      background-color: rebeccapurple;\n" +
+       //      "      color: lightpink;\n" +
+       //      "    }</style>"+
+       // " </custom-style>"
     }, []);
     // const userInfo = UserInfoService.getUserInfo();
     return(

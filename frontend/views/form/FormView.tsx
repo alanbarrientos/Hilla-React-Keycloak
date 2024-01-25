@@ -1,23 +1,21 @@
 import React, {useEffect, useRef} from "react";
 import {useForm, useFormPart} from "@hilla/react-form";
 import {TextField} from "@hilla/react-components/TextField.js";
-import ProveedorModel from "Frontend/generated/com/example/application/entity/ProveedorModel";
+import ProveedorSimpleModel from "Frontend/generated/com/example/application/entity/ProveedorSimpleModel";
 import {Button} from "@hilla/react-components/Button.js";
-import {ProveedorService} from "Frontend/generated/endpoints";
+import {ProveedorSimpleService} from "Frontend/generated/endpoints";
 import {Checkbox} from "@hilla/react-components/Checkbox";
-import {DatePicker} from "@hilla/react-components/DatePicker";
 import {FormLayout} from "@hilla/react-components/FormLayout";
-import Proveedor from "Frontend/generated/com/example/application/entity/Proveedor";
 import { Notification } from '@hilla/react-components/Notification.js';
 
 
 export default function FormView() {
-    const { invalid, submitting, model, field, reset, submit, addValidator} = useForm(ProveedorModel, {
+    const { invalid, submitting, model, field, reset, submit, addValidator} = useForm(ProveedorSimpleModel, {
         onSubmit: async (proveedor) => {
             if(proveedor.active === undefined){
                 proveedor.active = false;
             }
-            await ProveedorService.saveProveedor(proveedor);
+            await ProveedorSimpleService.saveProveedor(proveedor);
             Notification.show(proveedor.name + ' agregado correctamente')
             reset()
         }

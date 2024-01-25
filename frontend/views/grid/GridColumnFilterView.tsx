@@ -1,6 +1,6 @@
 import React from "react";
-import {ProveedorService} from "Frontend/generated/endpoints";
-import Proveedor from "Frontend/generated/com/example/application/entity/Proveedor";
+import {ProveedorSimpleService} from "Frontend/generated/endpoints";
+import ProveedorSimple from "Frontend/generated/com/example/application/entity/ProveedorSimple";
 import {
     Grid,
     type GridDataProviderCallback,
@@ -35,8 +35,8 @@ export default function GridColumnFilterView() {
     }
 
     async function proveedorProvider(
-        params: GridDataProviderParams<Proveedor>,
-        callback: GridDataProviderCallback<Proveedor>
+        params: GridDataProviderParams<ProveedorSimple>,
+        callback: GridDataProviderCallback<ProveedorSimple>
 
     ){
         const sort: Sort = {
@@ -47,12 +47,12 @@ export default function GridColumnFilterView() {
             })),
         };
 
-        const res = await ProveedorService.list({
+        const res = await ProveedorSimpleService.list({
             pageNumber:params.page,
             pageSize:params.pageSize,
             sort
         },
-            filterEstractorFromParams<Proveedor>(params)
+            filterEstractorFromParams<ProveedorSimple>(params)
     )
 
         callback(res.items, res.totalCount);

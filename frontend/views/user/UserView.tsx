@@ -22,22 +22,22 @@ export default function UserView() {
         ImageService.getImage().then((value:Image) => {setImage(value.imageBase64!)})
     }, [])
     return (
-        // <div className="flex flex-col h-full items-center justify-center p-l text-center box-border">
-        //     <img style={{ width: '200px' }} src="images/empty-plant.png" />
-        //     <h2>User view</h2>
-        // </div>
-        <div>
-            <h2>Need to be corrected I pass for now to make other things</h2>
-            <img src={form.value?.imageBase64} alt="image"></img>
-            <Upload capture="camera" accept="image/*" max-files="1"
-                    onUploadBefore={async (e: UploadBeforeEvent) => {
-                        const file = e.detail.file;
-                        e.preventDefault();
-                        if (form.value) {
-                            form.value.imageBase64 = await readAsDataURL(file);
-                        }
-                    }}></Upload>
-            <Button onClick={form.submit}>Save</Button>
+        <div className="flex flex-col h-full items-center justify-center p-l text-center box-border">
+            <img style={{ width: '200px' }} src="images/empty-plant.png" />
+            <h2>User view</h2>
         </div>
+        // <div>
+        //     <h2>Need to be corrected I pass for now to make other things</h2>
+        //     <img src={form.value?.imageBase64} alt="image"></img>
+        //     <Upload capture="camera" accept="image/*" max-files="1"
+        //             onUploadBefore={async (e: UploadBeforeEvent) => {
+        //                 const file = e.detail.file;
+        //                 e.preventDefault();
+        //                 if (form.value) {
+        //                     form.value.imageBase64 = await readAsDataURL(file);
+        //                 }
+        //             }}></Upload>
+        //     <Button onClick={form.submit}>Save</Button>
+        // </div>
     );
 }

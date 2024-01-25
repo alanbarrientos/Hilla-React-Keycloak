@@ -1,15 +1,15 @@
 import React, {useState} from "react";
-import ProveedorModel from "Frontend/generated/com/example/application/entity/ProveedorModel";
+import ProveedorSimpleModel from "Frontend/generated/com/example/application/entity/ProveedorSimpleModel";
 import {AutoForm} from "@hilla/react-crud";
-import {HillaProveedorService, ProveedorService} from "Frontend/generated/endpoints";
-import {VerticalLayout} from "@hilla/react-components/VerticalLayout";
+import {ProveedorSimpleService} from "Frontend/generated/endpoints";
+import {HillaProveedorSimpleService} from "Frontend/generated/endpoints";
 import {Button} from "@hilla/react-components/Button.js";
-import Proveedor from "Frontend/generated/com/example/application/entity/Proveedor";
+import ProveedorSimple from "Frontend/generated/com/example/application/entity/ProveedorSimple";
 
 export default function AutoFormView() {
-    const [editedItem, setEditedItem] = useState<Proveedor | null>(null);
+    const [editedItem, setEditedItem] = useState<ProveedorSimple | null>(null);
     const handleEdit = async () => {
-        setEditedItem(await ProveedorService.getById(1));
+        setEditedItem(await ProveedorSimpleService.getById(1));
     };
 
     const handleCreate = () => {
@@ -26,9 +26,8 @@ export default function AutoFormView() {
             <Button style={{marginLeft: '2rem'}} onClick={handleEdit}>Edit Mode</Button>
             <Button style={{marginLeft: '2rem'}} onClick={handleCreate}>Create Mode</Button>
             <AutoForm
-                // @ts-ignore
-                service={HillaProveedorService}
-                model={ProveedorModel}
+                service={HillaProveedorSimpleService}
+                model={ProveedorSimpleModel}
                 item={editedItem}
                 deleteButtonVisible={editedItem ? true : false}
                 style={{margin: '2rem'}}
